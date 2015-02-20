@@ -1,5 +1,5 @@
 FROM dockerfile/java:oracle-java7
-MAINTAINER Stanislaw Ogorkis, s.ogorkis@gmail.com
+MAINTAINER bghtrbb, na@na.com
 
 ADD assets /tmp
 
