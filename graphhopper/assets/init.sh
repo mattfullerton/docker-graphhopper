@@ -12,6 +12,7 @@ wget https://oss.sonatype.org/content/groups/public/com/graphhopper/graphhopper-
 unzip *.zip
 rm *.zip
 
+# Move files to the Graph Hopper Directory
 mv /tmp/config.properties $GRAPHHOPPER_DIR
 mv /tmp/start.sh $GRAPHHOPPER_DIR
 
