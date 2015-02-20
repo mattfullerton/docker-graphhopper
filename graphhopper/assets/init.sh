@@ -17,10 +17,11 @@ mv /tmp/config.properties $GRAPHHOPPER_DIR
 mv /tmp/start.sh $GRAPHHOPPER_DIR
 
 # Make the directory, then Change directory, then get .pdf file from the web
-mkdir -p /private/osm-data/
-cd /private/osm-data/
+mkdir -p /private/osm-data
+cd /private/osm-data
 #wget http://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf
 wget https://s3.amazonaws.com/metro-extracts.mapzen.com/charlotte_north-carolina.osm.pbf
+mv /private/osm-data/ /data
 
 echo "Showing contents of ${GRAPHHOPPER_DIR}"
 ls $GRAPHHOPPER_DIR
