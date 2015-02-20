@@ -22,8 +22,8 @@ You need to download .pbf files and put them in directory on your host. Then mou
 Example (North Carolina):
 
 ```
-mkdir -p ~/private/graphhopper-data/northcarolina/
-cd ~/private/graphhopper-data/northcarolina/
+mkdir -p /private/osm-data/
+cd /private/osm-data/
 wget http://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf
 ```
 
@@ -38,7 +38,7 @@ Initial container run might take some time as GraphHopper needs to processes .pb
 $ sudo docker run \
       -d \
       --name=graphhopper-northcarolina \
-      -v /home/stanislaw/private/graphhopper-data/northcarolina/:/data \
+      -v /private/osm-data/:/data \
       -p 8990:8989 \
       bghtrbb/uio \
       /graphhopper/start.sh
