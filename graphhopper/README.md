@@ -12,19 +12,19 @@ Take a look on files in assets directory:
 Make necessary changes in config files and build image:
 
 ```
-$ sudo docker build -t sogorkis/graphhopper .
+$ sudo docker build -t bghtrbb/uio .
 ```
 
 ### Downloading pbf files
 
 You need to download .pbf files and put them in directory on your host. Then mount this directory to container /data volume.
 
-Example (Berlin):
+Example (North Carolina):
 
 ```
-mkdir -p ~/private/graphhopper-data/berlin/
-cd ~/private/graphhopper-data/berlin/
-wget http://download.geofabrik.de/europe/germany/berlin-latest.osm.pbf
+mkdir -p ~/private/graphhopper-data/northcarolina/
+cd ~/private/graphhopper-data/northcarolina/
+wget http://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf
 ```
 
 ### Running container
@@ -37,12 +37,12 @@ Initial container run might take some time as GraphHopper needs to processes .pb
 ```
 $ sudo docker run \
       -d \
-      --name=graphhopper-berlin \
-      -v /home/stanislaw/private/graphhopper-data/berlin/:/data \
+      --name=graphhopper-northcarolina \
+      -v /home/stanislaw/private/graphhopper-data/northcarolina/:/data \
       -p 8990:8989 \
-      sogorkis/graphhopper \
+      bghtrbb/uio \
       /graphhopper/start.sh
-$ sudo docker logs -f graphhopper-berlin
+$ sudo docker logs -f graphhopper-northcarolina
 ...
 2014-10-04 11:21:30,110 [main] INFO  graphhopper.http.DefaultModule - loaded graph at:/data/berlin-latest.osm-gh, source:/data/berlin-latest.osm.pbf, acceptWay:car, class:LevelGraphStorage
 2014-10-04 11:21:30,611 [main] INFO  graphhopper.http.GHServer - Started server at HTTP 8989
