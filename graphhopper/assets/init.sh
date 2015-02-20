@@ -21,7 +21,7 @@ mkdir -p /private/osm-data
 cd /private/osm-data
 #wget http://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf
 wget https://s3.amazonaws.com/metro-extracts.mapzen.com/charlotte_north-carolina.osm.pbf
-mv /private/osm-data/ /data
+mv /private/osm-data/*.pdf /data
 
 echo "Showing contents of ${GRAPHHOPPER_DIR}"
 ls $GRAPHHOPPER_DIR
