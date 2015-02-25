@@ -11,8 +11,5 @@ WORKDIR /data
 
 RUN /tmp/init.sh
 
-RUN mkdir -p ~/tmp/graphhopper/
-RUN cd ~/tmp/graphhopper/
-RUN wget https://s3.amazonaws.com/metro-extracts.mapzen.com/charlotte_north-carolina.osm.pbf
-
-ENTRYPOINT ["/graphhopper/start.sh", "-d", "--name=graphhopper", "-v ~/tmp/graphhopper/:/data", "-p 8990:8989"]
+ENTRYPOINT ["/temp/download.sh", "-d", "--name=graphhopper", "-v ~/tmp/graphhopper/:/data", "-p 8990:8989"]
+CMD ["/graphhopper/start.sh"]
