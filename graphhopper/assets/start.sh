@@ -1,7 +1,6 @@
 #!/bin/sh
 
-#OSM_FILE=`ls /data/*.pbf`
-OSM_FILE=`ls /data/charlotte_north-carolina.osm.pbf`
+OSM_FILE=`ls /data/*.pbf`
 
 if [ -f /data/env.sh  ]; then
     . /data/env.sh
