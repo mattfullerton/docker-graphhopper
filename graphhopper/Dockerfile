@@ -10,4 +10,4 @@ EXPOSE 8989
 WORKDIR /data
 
 RUN /tmp/init.sh
-#RUN /tmp/start.sh
+RUN /tmp/start.sh
