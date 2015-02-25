@@ -11,5 +11,5 @@ WORKDIR /data
 
 RUN /tmp/init.sh
 
-ENTRYPOINT ["/temp/download.sh", "-d", "--name=graphhopper", "-v ~/tmp/graphhopper/:/data", "-p 8990:8989"]
+ENTRYPOINT ["/tmp/download.sh", "-d", "--name=graphhopper", "-v ~/tmp/graphhopper/:/data", "-p 8990:8989"]
 CMD ["/graphhopper/start.sh"]
