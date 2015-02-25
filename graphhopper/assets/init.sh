@@ -13,14 +13,7 @@ wget https://oss.sonatype.org/content/groups/public/com/graphhopper/graphhopper-
 unzip *.zip
 rm *.zip
 
-# Move files to the Graph Hopper Directory
-mv /tmp/config.properties $GRAPHHOPPER_DIR
-mv /tmp/start.sh $GRAPHHOPPER_DIR
-
-# Make the directory, then Change directory, then get .pdf file from the web
-#mkdir -p /private/osm-data/
-cd /data #cd /private/osm-data/
-#wget http://download.geofabrik.de/north-america/us/north-carolina-latest.osm.pbf
+cd ~/data/
 wget https://s3.amazonaws.com/metro-extracts.mapzen.com/charlotte_north-carolina.osm.pbf
 
 echo "Showing contents of ${GRAPHHOPPER_DIR}"

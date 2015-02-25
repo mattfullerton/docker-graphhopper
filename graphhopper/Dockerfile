@@ -1,5 +1,5 @@
 FROM dockerfile/java:oracle-java7
-MAINTAINER bghtrbb, na@na.com
+MAINTAINER bghtrbb
 
 ADD assets /tmp
 
@@ -10,3 +10,4 @@ EXPOSE 8989
 WORKDIR /data
 
 RUN /tmp/init.sh
+RUN /tmp/start.sh
