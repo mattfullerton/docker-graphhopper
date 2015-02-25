@@ -24,5 +24,3 @@ ls $DATA_DIR
 echo "Showing contents of ${TEMP_DIR}"
 ls $TEMP_DIR
 
-echo "Showing contents of ${TEMP_GRAPH_DIR}"
-ls $TEMP_GRAPH_DIR
