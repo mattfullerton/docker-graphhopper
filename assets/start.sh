@@ -5,8 +5,8 @@ DATA_DIR=/data
 TEMP_DIR=/tmp/
 TEMP_GRAPH_DIR=~/tmp/graphhopper/
 
-mkdir -p ~/tmp/graphhopper/
-cd ~/tmp/graphhopper/
+mkdir -p /data
+cd /data
 wget http://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf
 
 echo "Showing contents of ${GRAPHHOPPER_DIR}"
@@ -14,12 +14,6 @@ ls $GRAPHHOPPER_DIR
 
 echo "Showing contents of ${DATA_DIR}"
 ls $DATA_DIR
-
-echo "Showing contents of ${TEMP_DIR}"
-ls $TEMP_DIR
-
-echo "Showing contents of ${TEMP_GRAPH_DIR}"
-ls $TEMP_GRAPH_DIR
 
 OSM_FILE=`ls /data/*.pbf`
 
