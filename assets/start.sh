@@ -7,7 +7,7 @@ TEMP_GRAPH_DIR=~/tmp/graphhopper/
 
 mkdir -p ~/tmp/graphhopper/
 cd ~/tmp/graphhopper/
-wget https://s3.amazonaws.com/metro-extracts.mapzen.com/charlotte_north-carolina.osm.pbf
+wget http://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf
 
 echo "Showing contents of ${GRAPHHOPPER_DIR}"
 ls $GRAPHHOPPER_DIR
