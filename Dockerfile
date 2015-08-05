@@ -1,4 +1,4 @@
-FROM dockerfile/java:oracle-java7
+FROM dockerfile/java
 MAINTAINER bghtrbb
 
 ADD assets /tmp
