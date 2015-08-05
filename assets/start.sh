@@ -22,7 +22,7 @@ if [ -f /data/env.sh  ]; then
 fi
 
 if [ -z "${JAVA_OPTS}" ]; then
-    JAVA_OPTS="$JAVA_OPTS -Xms64m -Xmx1024m -XX:MaxPermSize=256m -Djava.net.preferIPv4Stack=true"
+    JAVA_OPTS="$JAVA_OPTS -Xms64m -Xmx256m -XX:MaxPermSize=256m -Djava.net.preferIPv4Stack=true"
     JAVA_OPTS="$JAVA_OPTS -server -Djava.awt.headless=true -Xconcurrentio"
     echo "Setting default JAVA_OPTS"
 fi
