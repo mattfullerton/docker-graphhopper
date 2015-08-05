@@ -1,4 +1,4 @@
-FROM dockerfile/java
+FROM java:7
 MAINTAINER bghtrbb
 
 ADD assets /tmp
