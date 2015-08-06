@@ -27,9 +27,20 @@ if [ -z "${JAVA_OPTS}" ]; then
     echo "Setting default JAVA_OPTS"
 fi
 
-RUN_ARGS=" -jar /graphhopper/*.jar jetty.resourcebase=/graphhopper/webapp config=/graphhopper/config.properties osmreader.osm=$OSM_FILE"
+RUN_ARGS=" jetty.resourcebase=/graphhopper/webapp config=/graphhopper/config.properties osmreader.osm=$OSM_FILE"
 
 echo "JAVA_OPTS= ${JAVA_OPTS}"
 echo "RUN_ARGS= ${RUN_ARGS}"
 
-java $JAVA_OPTS $RUN_ARGS
+JAR=$(ls target/traffic-demo-*-dependencies.jar)
+
+if [ "$JAVA" = "" ]; then
+ JAVA=java
+fi
+
+if [ ! -f "$JAR" ]; then
+  mvn -DskipTests=true install assembly:single
+  JAR=$(ls target/traffic-demo-*-dependencies.jar)
+fi
+
+exec "$JAVA" $JAVA_OPTS -jar $JAR "$@" $RUN_ARGS
