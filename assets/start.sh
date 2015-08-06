@@ -44,19 +44,7 @@ export MAVEN_OPTS="$MAVEN_OPTS $JAVA_OPTS"
   fi
   cd "$GRAPHHOPPER_DIR"
   VERSION=$(grep  "<name>" -A 1 pom.xml | grep version | cut -d'>' -f2 | cut -d'<' -f1)
-  WEB_JAR="$GRAPHHOPPER_DIR/web/target/graphhopper-web-$VERSION-with-dep.jar"
-  if [ ! -s "$WEB_JAR" ]; then         
-    "$MAVEN_HOME/bin/mvn" --projects web -DskipTests=true install assembly:single > /tmp/graphhopper-web-compile.log
-    returncode=$?
-    if [[ $returncode != 0 ]] ; then
-      echo "## compilation of web failed"
-      cat /tmp/graphhopper-web-compile.log
-      exit $returncode
-    fi
-  fi
-
-  RC_BASE=./web/src/main/webapp
-
-    exec "$JAVA" $JAVA_OPTS -jar "$WEB_JAR" jetty.resourcebase=$RC_BASE \
-	jetty.port=$JETTY_PORT jetty.host=$JETTY_HOST \
-    	config=/graphhopper/config.properties graph.location="$GRAPH" osmreader.osm="$OSM_FILE"
+echo "Echoing OSM FILE"
+echo "${OSM_FILE}"
+JAR=$(ls target/traffic-demo-*-dependencies.jar)
+exec "$JAVA" $JAVA_OPTS -jar "$JAR" config=/graphhopper/config.properties graph.location="$GRAPH" datasource="$OSM_FILE" osmreader.osm="$OSM_FILE"

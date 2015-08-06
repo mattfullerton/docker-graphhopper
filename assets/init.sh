@@ -8,11 +8,11 @@ TEMP_GRAPH_DIR=~/tmp/graphhopper/
 mkdir $GRAPHHOPPER_DIR
 cd $GRAPHHOPPER_DIR
 
-wget https://github.com/graphhopper/graphhopper/archive/master.zip
+wget https://github.com/karussell/graphhopper-traffic-data-integration/archive/master.zip
 unzip *.zip
 rm *.zip
-mv -f graphhopper-master/* ./
-rm -Rf graphhopper-master
+mv -f graphhopper-traffic-data-integration-master/* ./
+rm -Rf graphhopper-traffic-data-integration-master
 
 if [ "$MAVEN_HOME" = "" ]; then
     # not existent but probably is maven in the path?
@@ -32,31 +32,10 @@ if [ "$MAVEN_HOME" = "" ]; then
     fi
   fi
 
-if [ ! -d "./target" ]; then
-    echo "## building parent"
-    "$MAVEN_HOME/bin/mvn" --non-recursive install > /tmp/graphhopper-compile.log
-     returncode=$?
-     if [[ $returncode != 0 ]] ; then
-       echo "## compilation of parent failed"
-       cat /tmp/graphhopper-compile.log
-       exit $returncode
-     fi                                     
-  fi
-  
-  if [ ! -f "$JAR" ]; then
-    echo "## now building graphhopper jar: $JAR"
-    echo "## using maven at $MAVEN_HOME"
-    #mvn clean
-    "$MAVEN_HOME/bin/mvn" --projects core,tools -DskipTests=true install assembly:single > /tmp/graphhopper-compile.log
-    returncode=$?
-    if [[ $returncode != 0 ]] ; then
-        echo "## compilation of core failed"
-        cat /tmp/graphhopper-compile.log
-        exit $returncode
-    fi      
-  else
-    echo "## existing jar found $JAR"
-  fi
+JAR=$(ls target/traffic-demo-*-dependencies.jar)
+if [ ! -f "$JAR" ]; then
+  "$MAVEN_HOME/bin/mvn" -DskipTests=true install assembly:single
+fi
 
 mv /tmp/config.properties $GRAPHHOPPER_DIR
 mv /tmp/start.sh $GRAPHHOPPER_DIR
