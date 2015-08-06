@@ -4,10 +4,16 @@ GRAPHHOPPER_DIR=/graphhopper
 DATA_DIR=/data
 TEMP_DIR=/tmp/
 TEMP_GRAPH_DIR=~/tmp/graphhopper/
+MAVEN_HOME="$GRAPHHOPPER_DIR/maven"
+JAVA=$JAVA_HOME/bin/java
+if [ "$JAVA_HOME" = "" ]; then
+ JAVA=java
+fi
 
 mkdir -p /data
 cd /data
-wget http://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf
+#wget http://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf
+wget http://download.geofabrik.de/europe/germany/nordrhein-westfalen/koeln-regbez-latest.osm.pbf
 
 echo "Showing contents of ${GRAPHHOPPER_DIR}"
 ls $GRAPHHOPPER_DIR
@@ -27,20 +33,30 @@ if [ -z "${JAVA_OPTS}" ]; then
     echo "Setting default JAVA_OPTS"
 fi
 
-RUN_ARGS=" jetty.resourcebase=/graphhopper/webapp config=/graphhopper/config.properties osmreader.osm=$OSM_FILE"
-
 echo "JAVA_OPTS= ${JAVA_OPTS}"
-echo "RUN_ARGS= ${RUN_ARGS}"
 
-JAR=$(ls target/traffic-demo-*-dependencies.jar)
+NAME="${OSM_FILE%.*}"
+GRAPH=$NAME-gh
 
-if [ "$JAVA" = "" ]; then
- JAVA=java
-fi
+export MAVEN_OPTS="$MAVEN_OPTS $JAVA_OPTS"
+  if [ "$JETTY_PORT" = "" ]; then  
+    JETTY_PORT=8989
+  fi
+  cd "$GRAPHHOPPER_DIR"
+  VERSION=$(grep  "<name>" -A 1 pom.xml | grep version | cut -d'>' -f2 | cut -d'<' -f1)
+  WEB_JAR="$GRAPHHOPPER_DIR/web/target/graphhopper-web-$VERSION-with-dep.jar"
+  if [ ! -s "$WEB_JAR" ]; then         
+    "$MAVEN_HOME/bin/mvn" --projects web -DskipTests=true install assembly:single > /tmp/graphhopper-web-compile.log
+    returncode=$?
+    if [[ $returncode != 0 ]] ; then
+      echo "## compilation of web failed"
+      cat /tmp/graphhopper-web-compile.log
+      exit $returncode
+    fi
+  fi
 
-if [ ! -f "$JAR" ]; then
-  mvn -DskipTests=true install assembly:single
-  JAR=$(ls target/traffic-demo-*-dependencies.jar)
-fi
+  RC_BASE=./web/src/main/webapp
 
-exec "$JAVA" $JAVA_OPTS -jar $JAR "$@" $RUN_ARGS
+    exec "$JAVA" $JAVA_OPTS -jar "$WEB_JAR" jetty.resourcebase=$RC_BASE \
+	jetty.port=$JETTY_PORT jetty.host=$JETTY_HOST \
+    	config=/graphhopper/config.properties graph.location="$GRAPH" osmreader.osm="$OSM_FILE"
