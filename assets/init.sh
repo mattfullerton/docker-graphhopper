@@ -8,7 +8,7 @@ TEMP_GRAPH_DIR=~/tmp/graphhopper/
 mkdir $GRAPHHOPPER_DIR
 cd $GRAPHHOPPER_DIR
 
-wget https://oss.sonatype.org/content/groups/public/com/graphhopper/graphhopper-web/0.3/graphhopper-web-0.3-bin.zip
+wget https://github.com/graphhopper/graphhopper/archive/master.zip
 unzip *.zip
 rm *.zip
 
