@@ -8,7 +8,7 @@ TEMP_GRAPH_DIR=~/tmp/graphhopper/
 mkdir $GRAPHHOPPER_DIR
 cd $GRAPHHOPPER_DIR
 
-wget https://github.com/karussell/graphhopper-traffic-data-integration/archive/master.zip
+wget https://github.com/smartlane/graphhopper-traffic-data-integration/archive/master.zip
 unzip *.zip
 rm *.zip
 mv -f graphhopper-traffic-data-integration-master/* ./
