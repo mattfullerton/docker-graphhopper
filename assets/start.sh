@@ -13,7 +13,8 @@ fi
 mkdir -p /data
 cd /data
 #wget http://download.geofabrik.de/europe/germany/hessen-latest.osm.pbf
-wget http://download.geofabrik.de/europe/germany/nordrhein-westfalen/koeln-regbez-latest.osm.pbf
+#wget http://download.geofabrik.de/europe/germany/nordrhein-westfalen/koeln-regbez-latest.osm.pbf
+wget http:////download.geofabrik.de/europe/germany-latest.osm.pbf
 
 echo "Showing contents of ${GRAPHHOPPER_DIR}"
 ls $GRAPHHOPPER_DIR
